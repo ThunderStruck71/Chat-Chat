@@ -1,3 +1,4 @@
+import { loginActions } from "../actions";
 import React, { FC, useState } from "react";
 
 export const LoginPage: FC = () => {
@@ -20,7 +21,7 @@ export const LoginPage: FC = () => {
             return;
         }
 
-        alert(inputValue);
+        loginActions.login(inputValue);
         setInputValue("");
     }
 
