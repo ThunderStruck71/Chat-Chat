@@ -1,5 +1,5 @@
 import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "../contants";
-import { Dispatch } from "../helpers";
+import { Dispatch, history } from "../helpers";
 import { loginServices } from "../services";
 import { User } from "../types";
 
@@ -29,6 +29,7 @@ function login(userName: string) {
 
         return loginServices.signIn(userName)
             .then(user => {
+                history.push("/chatRoom");
                 dispatch({
                     type: LOGIN_SUCCESS,
                     payload: user
@@ -44,6 +45,7 @@ function login(userName: string) {
 };
 
 function logout(): LogoutAction {
+    history.push("/login");
     return {
         type: LOGOUT
     };
