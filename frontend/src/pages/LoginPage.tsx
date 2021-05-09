@@ -1,9 +1,11 @@
 import { loginActions } from "../actions";
 import React, { FC, useState } from "react";
+import { useDispatch } from "react-redux";
 
 export const LoginPage: FC = () => {
     const [inputValue, setInputValue] = useState("");
     const [error, setError] = useState(false);
+    const dispatch = useDispatch();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
@@ -21,7 +23,7 @@ export const LoginPage: FC = () => {
             return;
         }
 
-        loginActions.login(inputValue);
+        dispatch(loginActions.login(inputValue));
         setInputValue("");
     }
 
