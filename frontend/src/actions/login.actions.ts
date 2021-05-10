@@ -1,7 +1,7 @@
 import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "../contants";
 import { Dispatch, history } from "../helpers";
 import { loginServices } from "../services";
-import { User } from "../types";
+import { User, Error } from "../types";
 
 type LoginRequestAction = {
     type: typeof LOGIN_REQUEST
@@ -37,7 +37,13 @@ function login(userName: string) {
                     payload: signInResponse
                 })
             }
-        } catch (error) {
+        } catch (e) {
+            const error: Error = {
+                errorCode: 500,
+                message: "Server",
+                stackTrace: ""
+            };
+
             dispatch({
                 type: LOGIN_FAILURE,
                 reason: error

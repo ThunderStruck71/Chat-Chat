@@ -7,16 +7,16 @@ export const loginServices = {
 
 async function signIn(userName: string) {
     const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { 'Content-Type': "application/json" },
         body: JSON.stringify({ userName })
     };
 
-    const response = await fetch(`/users/login`, requestOptions);
-    const responseJson = response.json();
+    const response = await fetch("/users/login", requestOptions);
+    const responseJson = await response.json();
 
     if (response.status >= 200 && response.status < 300) {
-        localStorage.setItem('user', JSON.stringify(responseJson));
+        localStorage.setItem("user", JSON.stringify(responseJson));
         return responseJson;
     } else {
         signOut();
