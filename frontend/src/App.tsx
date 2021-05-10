@@ -11,8 +11,8 @@ function _App(): JSX.Element | null {
         <Router history={history}>
             <Switch>
                 <PrivateRoute path="/chatRoom" component={ChatRoomPage} />
-                <Route path="/login" component={LoginPage} />
-                <Redirect from="*" to="/login" />
+                <Route path="/auth" component={LoginPage} />
+                <Redirect from="*" to="/auth" />
             </Switch>
         </Router>
     );
