@@ -22,7 +22,7 @@ const initialState = user
         error: null
     };
 
-const loginReducer = (state: LoginState = initialState, action: LoginAction) => {
+const loginReducer = (state: LoginState = initialState, action: LoginAction): LoginState => {
     switch (action.type) {
         case LOGIN_REQUEST:
         case LOGOUT:
@@ -34,11 +34,13 @@ const loginReducer = (state: LoginState = initialState, action: LoginAction) => 
         case LOGIN_SUCCESS:
             return {
                 loggedIn: true,
-                user: action.payload
+                user: action.payload,
+                error: null
             }
         case LOGIN_FAILURE:
             return {
                 loggedIn: false,
+                user: undefined,
                 error: action.reason
             }
 
