@@ -29,6 +29,11 @@ module.exports = {
         publicPath: "http://localhost:3003/dist/",
         historyApiFallback: true,
         hotOnly: true,
+        proxy: {
+            "/users": {
+              target: "http://localhost:5005"
+            }
+          }
     },
     plugins: [new webpack.HotModuleReplacementPlugin()],
     devtool: "eval-source-map",
