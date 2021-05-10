@@ -22,25 +22,27 @@ type LogoutAction = {
 };
 
 function login(userName: string) {
-    return (dispatch: Dispatch) => {
-        dispatch({
-            type: LOGIN_REQUEST
-        });
+    return async (dispatch: Dispatch) => {
+        try {
+            dispatch({
+                type: LOGIN_REQUEST
+            });
 
-        return loginServices.signIn(userName)
-            .then(user => {
+            const signInResponse = await loginServices.signIn(userName);
+
+            if (signInResponse) {
                 history.push("/chatRoom");
                 dispatch({
                     type: LOGIN_SUCCESS,
-                    payload: user
+                    payload: signInResponse
                 })
+            }
+        } catch (error) {
+            dispatch({
+                type: LOGIN_FAILURE,
+                reason: error
             })
-            .catch(error => {
-                dispatch({
-                    type: LOGIN_FAILURE,
-                    reason: error
-                })
-            });
+        }
     }
 };
 
