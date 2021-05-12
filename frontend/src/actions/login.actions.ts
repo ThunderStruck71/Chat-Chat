@@ -30,20 +30,17 @@ function login(userName: string) {
 
             const signInResponse = await loginServices.signIn(userName);
 
-            if (signInResponse) {
+            if (signInResponse["token"]) {
                 history.push("/chatRoom");
                 dispatch({
                     type: LOGIN_SUCCESS,
                     payload: signInResponse
                 })
+            } else {
+                history.push("/error");
+                throw signInResponse;
             }
-        } catch (e) {
-            const error: Error = {
-                errorCode: 500,
-                message: "Server",
-                stackTrace: ""
-            };
-
+        } catch (error) {
             dispatch({
                 type: LOGIN_FAILURE,
                 reason: error
