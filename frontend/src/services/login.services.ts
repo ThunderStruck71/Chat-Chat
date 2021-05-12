@@ -17,11 +17,9 @@ async function signIn(userName: string) {
 
     if (response.status >= 200 && response.status < 300) {
         localStorage.setItem("user", JSON.stringify(responseJson));
-        return responseJson;
-    } else {
-        signOut();
-        throw responseJson;
     }
+
+    return responseJson;
 };
 
 function signOut() {
