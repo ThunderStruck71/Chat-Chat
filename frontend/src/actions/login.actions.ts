@@ -54,6 +54,7 @@ function login(userName: string) {
 
 function logout(): LogoutAction {
     history.push("/login");
+    loginServices.signOut();
     return {
         type: LOGOUT
     };
