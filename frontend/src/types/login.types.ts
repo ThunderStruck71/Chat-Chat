@@ -5,7 +5,7 @@ export type User = {
 };
 
 export type Error = {
-    errorCode: number;
-    message: string;
+    status: number;
+    errorMessage: string;
     stackTrace: string;
 }
