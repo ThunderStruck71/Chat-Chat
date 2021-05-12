@@ -3,6 +3,8 @@ import { JwtModule } from "@nestjs/jwt";
 import { jwtConstants } from "./constants";
 import { UsersService } from "./users.service";
 import { UsersController } from "./users.controller";
+import { MongooseModule } from "@nestjs/mongoose";
+import { User, UserSchema } from "./schemas/user.schema";
 
 @Module({
   imports: [
@@ -10,6 +12,7 @@ import { UsersController } from "./users.controller";
       secret: jwtConstants.secret,
       signOptions: { expiresIn: "60s" },
     }),
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])
   ],
   controllers: [UsersController],
   providers: [UsersService],
