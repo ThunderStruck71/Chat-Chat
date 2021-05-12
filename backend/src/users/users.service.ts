@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { randomStringGenerator } from "./utils/users.utils";
 import { UserDto } from "./dto/user.dto";
@@ -11,6 +11,16 @@ export class UsersService {
   constructor (private jwtService: JwtService, @InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   async create(userDto: UserDto): Promise<User> {
+    const users = await this.userModel.find();
+
+    if (users && users.find(user => user.userName === userDto.userName)) {
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        errorMessage: "Имя такого пользователя уже существует",
+        stackTrace: ""
+      }, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     const payload = {
       id: randomStringGenerator(),
       userName: userDto.userName
