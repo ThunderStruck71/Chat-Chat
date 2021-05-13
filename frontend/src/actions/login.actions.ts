@@ -50,7 +50,7 @@ function login(userName: string) {
 };
 
 function logout(): LogoutAction {
-    history.push("/login");
+    history.push("/auth");
     loginServices.signOut();
     return {
         type: LOGOUT
