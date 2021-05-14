@@ -39,4 +39,8 @@ export class UsersService {
       }
     });
   }
+
+  async getAll(): Promise<User[]> {
+    return await this.userModel.find().exec();
+  }
 }
