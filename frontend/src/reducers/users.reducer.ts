@@ -1,6 +1,6 @@
 import { UsersAction } from "../actions";
 import { GET_ALL_FAILURE, GET_ALL_REQUEST, GET_ALL_SUCCESS } from "../contants";
-import { User } from "../types";
+import { Error, User } from "../types";
 
 type UsersState = {
     users: User[],
@@ -12,7 +12,7 @@ const initialState = {
     error: null
 };
 
-export const usersReducer = (state: UsersState = initialState, action: UsersAction) => {
+export const usersReducer = (state: UsersState = initialState, action: UsersAction): UsersState => {
     switch (action.type) {
         case GET_ALL_REQUEST:
             return {
