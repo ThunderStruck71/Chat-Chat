@@ -5,15 +5,19 @@ import { hot } from "react-hot-loader/root";
 import { Redirect, Route, Router, Switch } from "react-router";
 import { ChatRoomPage, LoginPage, ErrorPage } from "./pages";
 import { PrivateRoute } from "./components";
+import { useSelector } from "react-redux";
+import { RootState } from "reducers";
 
 function _App(): JSX.Element | null {
+    const {loggedIn} = useSelector((state: RootState) => state.login);
+
     return (
         <Router history={history}>
             <Switch>
-                <PrivateRoute path="/chatRoom" component={ChatRoomPage} />
                 <Route path="/auth" component={LoginPage} />
                 <Route path="/error" component={ErrorPage} />
-                <Redirect from="*" to="/auth" />
+                <PrivateRoute path="/chatRoom" component={ChatRoomPage} isLoggedIn={loggedIn} />
+                <Redirect from="/" to="/auth" />
             </Switch>
         </Router>
     );
