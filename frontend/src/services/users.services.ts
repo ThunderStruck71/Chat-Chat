@@ -8,7 +8,7 @@ async function getAll() {
         headers: { 'Content-Type': "application/json" },
     };
 
-    const response = await fetch("/users/all", requestOptions);
+    const response = await fetch("/users/getAll", requestOptions);
     const responseJson = await response.json();
 
     return responseJson;
