@@ -7,20 +7,12 @@ type LoginState = {
     loggedIn: boolean,
     error: Error | null
 };
-
-let user = JSON.parse(localStorage.getItem("user") || '{}');
-
-const initialState = user
-    ? {
-        user,
-        loggedIn: true,
-        error: null
-    }
-    : {
-        user: undefined,
-        loggedIn: false,
-        error: null
-    };
+  
+const initialState = {
+    user: JSON.parse(localStorage.getItem("user") || "{}"),
+    loggedIn: !!localStorage.getItem("user"),
+    error: null
+}
 
 const loginReducer = (state: LoginState = initialState, action: LoginAction): LoginState => {
     switch (action.type) {
