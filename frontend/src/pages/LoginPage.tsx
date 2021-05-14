@@ -1,11 +1,23 @@
 import { loginActions } from "../actions";
-import React, { FC, useState } from "react";
-import { useDispatch} from "react-redux";
+import React, { FC, useEffect, useState } from "react";
+import { useDispatch, useSelector} from "react-redux";
+import { RootState } from "reducers";
+import { useHistory } from "react-router";
 
 export const LoginPage: FC = () => {
     const [inputValue, setInputValue] = useState("");
     const [fieldNotEmpty, setFieldNotEmpty] = useState(false);
+
     const dispatch = useDispatch();
+    const {loggedIn} = useSelector((state: RootState) => state.login);
+
+    const history = useHistory();
+
+    useEffect(() => {
+        if (loggedIn) {
+            history.push("/chatRoom");
+        }
+    }, []);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
